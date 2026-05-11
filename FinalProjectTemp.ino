@@ -482,6 +482,32 @@ void U0PutChar(unsigned char U0pdata){
   *myUDR0 = U0pdata;
 }
 void U0PutString(const char *str){ // Take a string
+  // Timestamp every output to the serial monitor
+    DateTime now = rtc.now();
+    U0PutChar('[');
+
+    // Hour
+    if(now.hour() < 10) U0PutChar('0');
+    U0PutChar(now.hour() / 10 + '0');
+    U0PutChar(now.hour() % 10 + '0');
+
+    U0PutChar(':');
+
+    // Minute
+    if(now.minute() < 10) U0PutChar('0');
+    U0PutChar(now.minute() / 10 + '0');
+    U0PutChar(now.minute() % 10 + '0');
+
+    U0PutChar(':');
+
+    // Second
+    if(now.second() < 10) U0PutChar('0');
+    U0PutChar(now.second() / 10 + '0');
+    U0PutChar(now.second() % 10 + '0');
+
+    U0PutChar(']');
+    U0PutChar(' ');
+  
  while(*str != '\0'){ // Iterates through string until hit the end of the string
         U0PutChar(*str); // Put each char in the string to the existing char printing function
         str++;
