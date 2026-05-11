@@ -331,6 +331,7 @@ void loop()
       if(getTemp() > tempThreshold){ // Threshold to active state
         *portL &= ~(1 << 6); //(IDLE_LED, LOW); turn idle led off as leaving
         currentState = ACTIVE;
+        updateCurrentState(currentState);
       }
       if(getDHTError()){
         currentState = ERROR;
